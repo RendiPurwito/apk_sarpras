@@ -5,6 +5,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\BarangKeluarController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,10 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('login');
 })->name('login');
+
+Route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogin');
+
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 // Home

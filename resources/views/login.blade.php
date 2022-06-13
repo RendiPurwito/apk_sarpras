@@ -10,8 +10,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-        <!-- Internal Login css -->
-        <link rel="stylesheet" href="css/style.css">
+    <!-- Internal Login css -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Icon Line Awesome -->
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+
 
     <title>Hello, world!</title>
 </head>
@@ -22,8 +27,8 @@
             <div class="col-md-6 offset-md-3">
                 <div class="card my-5">
 
-                    <form class="card-body cardbody-color p-lg-5">
-
+                    <form class="card-body cardbody-color p-lg-5" action="{{route('postlogin')}}" method="POST">
+                        {{ csrf_field() }}
                         <div class="text-center">
                             <img src="/assets/img/logo-tb-nobg.png"
                                 class="img-fluid my-3" width="200px"
@@ -31,11 +36,13 @@
                         </div>
 
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="Username" aria-describedby="emailHelp"
-                                placeholder="User Name">
+                            <input type="email" name="email" class="form-control" id="Username" aria-describedby="emailHelp"
+                                placeholder="Gmail">
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control" id="password" placeholder="password">
+                            <input type="password" name="password" class="form-control" id="password" placeholder="password">
+                            <a href="" class="text-dark">
+                            </a>
                         </div>
                         <div class="mb-3">
                             <span><u><a href="" class="text-dark">Forgot Password?</a></u></span>
