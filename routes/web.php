@@ -31,11 +31,14 @@ Route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogi
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+Route::group(['middleware' => ['auth']], function () {
+    // Home
+    Route::get('/home', function () {
+        return view('dashboard');
+    })->name('home');
+});
 
-// Home
-Route::get('/home', function () {
-    return view('dashboard');
-})->name('home');
+
 
 // Operator
 Route::get('/operator', [OperatorController::class, 'index'])->name('operator');
