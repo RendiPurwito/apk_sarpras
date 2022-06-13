@@ -2,7 +2,6 @@
 @section('title', 'Table Data Operator')
 @section('content')
 <div class="container p-5">
-    <a href="/tambahoperator" type="button" class="btn btn-success mb-3">Tambah +</a>
     <section class="section">
         <div class="table-responsive">
             <table class="table table-hover">
@@ -21,7 +20,7 @@
                         <td>{{ $row->name }}</td>
                         <td>{{ $row->email }}</td>
                         <td>
-                            <a href="/editoperator/{{$row->id_operator}}" class="text-warning">
+                            <a href="/editoperator/{{$row->id}}" class="text-warning">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                                     class="bi bi-pencil-square" viewBox="0 0 16 16">
                                     <path
@@ -31,7 +30,7 @@
                                 </svg>
                             </a>|
 
-                            <a href="/deleteoperator/{{$row->id_operator}}" class="text-danger">
+                            <a href="/deleteoperator/{{$row->id}}" class="text-danger">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                                     class="bi bi-trash" viewBox="0 0 16 16">
                                     <path
