@@ -22,6 +22,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// register
+Route::get('/register', function () {
+    return view('register');
+})->name('register');
+
+
 // Login
 Route::get('/login', function () {
     return view('login');

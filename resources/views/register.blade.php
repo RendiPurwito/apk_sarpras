@@ -29,13 +29,17 @@
                     
                     <form class="card-body cardbody-color p-lg-5" action="{{route('postlogin')}}" method="POST">
                         {{ csrf_field() }}
-                        <h1 class="text-center">Login Your Account</h1>
+                        <h1 class="text-center">Register Your Account</h1>
                         <div class="text-center">
                             <img src="/assets/img/logo-tb-nobg.png"
                                 class="img-fluid my-3" width="200px"
                                 alt="profile">
                         </div>
 
+                        <div class="mb-3">
+                            <input type="text" name="name" class="form-control" id="Username" aria-describedby="emailHelp"
+                                placeholder="User Name">
+                        </div>
                         <div class="mb-3">
                             <input type="email" name="email" class="form-control" id="Gmail" aria-describedby="emailHelp"
                                 placeholder="Gmail">
@@ -45,16 +49,10 @@
                             <a href="" class="text-dark">
                             </a>
                         </div>
-                        <div class="mb-3">
-                            <span><u><a href="" class="text-dark">Forgot Password?</a></u></span>
-                        </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-color px-5 mb-5 w-100 ">Login</button>
                         </div>
-                        <div id="emailHelp" class="form-text text-center mb-5 text-dark">Not
-                            Registered? <a href="{{route('register')}}" class="text-dark fw-bold"><u>Create an
-                                Account
-                                </u></a>
+                        <div id="emailHelp" class="form-text text-center mb-5 text-dark">Have an account? <a href="{{route('login')}}" class="text-dark fw-bold"> <u>Login</u></a>
                         </div>
                     </form>
                 </div>
