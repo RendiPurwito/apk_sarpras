@@ -27,7 +27,7 @@
             <div class="col-md-6 offset-md-3">
                 <div class="card my-5">
                     
-                    <form class="card-body cardbody-color p-lg-5" action="{{route('postlogin')}}" method="POST">
+                    <form class="card-body cardbody-color p-lg-5" action="{{route('postregister')}}" method="POST">
                         {{ csrf_field() }}
                         <h1 class="text-center">Register Your Account</h1>
                         <div class="text-center">

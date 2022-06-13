@@ -6,6 +6,7 @@ use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return view('register');
 })->name('register');
+
+Route::post('/postregister', [RegisterController::class, 'postregister'])->name('postregister');
 
 
 // Login
