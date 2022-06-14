@@ -12,12 +12,17 @@
                 @method('put')
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Operator</label>
-                    <select class="form-select" name="user_id">
-                        @foreach($datauser as $user)
-                        <option value="{{$user->id}}">{{$user->name}}</option>
-                        @endforeach
-                    </select>
-                    @error('user_id')
+                    <input type="text" class="form-control" name="name" value="{{ $data->name }}">
+                    @error('name')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Operator</label>
+                    <input type="email" class="form-control" name="email" value="{{ $data->email }}">
+                    @error('email')
                     <div class="text-danger">
                         {{ $message }}
                     </div>
