@@ -5,6 +5,8 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\BarangKeluarController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,16 +23,31 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// register
+Route::get('/register', function () {
+    return view('register');
+})->name('register');
+
+Route::post('/postregister', [RegisterController::class, 'postregister'])->name('postregister');
+
+
 // Login
 Route::get('/login', function () {
     return view('login');
 })->name('login');
 
+Route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogin');
 
-// Home
-Route::get('/home', function () {
-    return view('dashboard');
-})->name('home');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::group(['middleware' => ['auth']], function () {
+    // Home
+    Route::get('/home', function () {
+        return view('dashboard');
+    })->name('home');
+});
+
+
 
 // Operator
 Route::get('/operator', [OperatorController::class, 'index'])->name('operator');
