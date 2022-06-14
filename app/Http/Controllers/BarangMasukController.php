@@ -44,6 +44,18 @@ class BarangMasukController extends Controller
     public function update(Request $request, $id){
         $data = BarangMasuk::find($id);
         $data->update($request->all());
+        if ($request->hasFile('foto')) {
+            $destination = 'images/'.$data->foto;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('foto');
+            $extension = $file->getClientOriginalName();
+            $filename = time().'.'.$extension;
+            $file->move('images/', $filename);
+            $data->foto = $filename;
+        }
+        $data->update();
         return redirect()->route('barangmasuk');
     }
 

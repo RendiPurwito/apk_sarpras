@@ -18,9 +18,8 @@
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
                     <select class="form-select" name="barang_id">
-                    <option selected>Select Barang</option>
-                        @foreach($databarang as $data2)
-                        <option value="{{$data2->id}}">{{$data2->nama_barang}}</option>
+                        @foreach($databarang as $data3)
+                        <option value="{{$data3->id}}">{{$data3->nama_barang}}</option>
                         @endforeach
                     </select>
                     @error('barang_id')
@@ -52,6 +51,9 @@
 
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Foto Barang</label>
+                    <div class="form-group">
+                        <img src="{{asset('images/'.$data->foto)}}" style="width: 100px">
+                    </div>
                     <input type="file" class="form-control" name="foto">
                     @error('foto')
                     <div class="text-danger">

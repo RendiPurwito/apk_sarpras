@@ -35,7 +35,12 @@ class BarangKeluarController extends Controller
             'operator_id' => 'required',
         ]);
     
-        BarangKeluar::create($request->all());
+        $data = BarangKeluar::create($request->all());
+        if($request->hasFile('foto')){
+            $request->file('foto')->move('images/', $request->file('foto')->getClientOriginalName());
+            $data->foto = $request->file('foto')->getClientOriginalName();
+            $data->save();
+        }
         return redirect()->route('barangkeluar');
     }
 
@@ -48,6 +53,18 @@ class BarangKeluarController extends Controller
     public function update(Request $request, $id){
         $data = BarangKeluar::find($id);
         $data->update($request->all());
+        if ($request->hasFile('foto')) {
+            $destination = 'images/'.$data->foto;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('foto');
+            $extension = $file->getClientOriginalName();
+            $filename = time().'.'.$extension;
+            $file->move('images/', $filename);
+            $data->foto = $filename;
+        }
+        $data->update();
         return redirect()->route('barangkeluar');
     }
 
