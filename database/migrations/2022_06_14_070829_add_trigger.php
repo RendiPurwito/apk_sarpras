@@ -14,8 +14,8 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::unprepared(" CREATE TRIGGER stok_masuk AFTER INSERT ON 'barang_masuks' FOR EACH ROW BEGIN
-        INSERT INTO 'barangs' ('') VALUES (NEW.id) ");
+        DB::unprepared(" CREATE TRIGGER stok_masuk AFTER INSERT ON barang_masuks FOR EACH ROW BEGIN
+        INSERT INTO barang_masuks (stok_masuk) VALUES (NEW.id) ");
     }
 
     /**
