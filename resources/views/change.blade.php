@@ -1,4 +1,4 @@
-@extends('layout.main2')
+<!-- @extends('layout.main2')
 
 @section('content')
     
@@ -53,4 +53,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection -->

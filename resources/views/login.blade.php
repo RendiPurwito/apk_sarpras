@@ -25,7 +25,7 @@
                         </a>
                     </div>
                     <div class="mb-3">
-                        <span><u><a href="{{route('change')}}" class="text-dark">Forgot Password?</a></u></span>
+                        <span><u><a href="  " class="text-dark">Forgot Password?</a></u></span>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-color px-5 mb-5 w-100 ">Login</button>
