@@ -46,7 +46,7 @@
 
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Foto Barang</label>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <img src="{{asset('images/'.$data->foto)}}" style="width: 100px">
                     </div>
                     <div class="form-group mt-3">

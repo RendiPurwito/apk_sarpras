@@ -26,7 +26,7 @@
                     <td><a href="{{asset('images/'.$row->foto)}}" target="_blank" rel="noopener noreferrer">Lihat
                                 Gambar</a></td>
                     <td>{{ $row->tanggal_keluar }}</td>
-                    <td>{{ $row->operator_id }}</td>
+                    <td>{{ $row->name }}</td>
                     <td>{{ $row->keterangan}}</td>
                     <td>
                         <a href="/editbarangkeluar/{{$row->id_barang}}" class="text-warning">

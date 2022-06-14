@@ -7,25 +7,30 @@ use App\Models\Barang;
 use App\Models\Operator;
 use App\Models\BarangKeluar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class BarangKeluarController extends Controller
 {
     public function keluar()
     {
-        $data = BarangKeluar::select('barang_keluars.*', 'barangs.*', 'barang_keluars.id as id_barang')
+        $data = BarangKeluar::select('barang_keluars.*', 'barangs.*', 'users.*', 'barang_keluars.id as id_barang')
 		->leftJoin('barangs', 'barangs.id', 'barang_keluars.barang_id')
+        ->leftJoin('users', 'users.id', 'barang_keluars.user_id')
         ->paginate(5);
         return view('Data Barang Keluar.table', ['data' => $data]);
     }
 
     public function create(){
         $databarang = Barang::all();
+        $datauser = User::all();
         return view('Data Barang Keluar.add',[
             'databarang' => $databarang,
+            'datauser' => $datauser,
         ]);
     }
     
     public function store(Request $request){
+        // dd($request->all());
         $this->validate($request, [
             'nama_peminjam' => 'required',
             'barang_id' => 'required',
@@ -34,6 +39,7 @@ class BarangKeluarController extends Controller
             'tanggal_keluar' => 'required',
             'operator_id' => 'required',
         ]);
+
     
         $data = BarangKeluar::create($request->all());
         if($request->hasFile('foto')){
