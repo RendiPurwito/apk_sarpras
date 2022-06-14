@@ -7,7 +7,7 @@
     <div class="col-12">
         <div class="bg-light rounded h-100 p-4">
             <h6 class="mb-4">Tambah Barang Keluar</h6>
-            <form class="form" action="/insertbarangkeluar" method="post" enctype="multipart/form-data">
+            <form class="form" action="{{route ('insertbarangkeluar')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Nama Peminjam</label>
@@ -61,8 +61,17 @@
 
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Operator</label>
-                    <input type="select" class="form-control" name="operator_id">
-                    
+                    <select class="form-select" name="user_id">
+                        <option selected>Select operator</option>
+                        @foreach($datauser as $user)
+                        <option value="{{$user->id}}">{{$user->name}}</option>
+                        @endforeach
+                    </select>
+                    @error('user_id')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">

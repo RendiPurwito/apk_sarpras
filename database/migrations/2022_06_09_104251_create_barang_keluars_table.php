@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('nama_peminjam');
             $table->foreignId('barang_id');
             $table->string('foto');
-            $table->integer('jumlah_barang');
+            $table->string('jumlah_barang');
             $table->date('tanggal_keluar');
-            $table->string('operator_id');
+            $table->foreignId('user_id');
             $table->string('keterangan');
             $table->timestamps();
         });

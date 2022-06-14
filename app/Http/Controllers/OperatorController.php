@@ -10,9 +10,7 @@ class OperatorController extends Controller
 {
     public function index()
     {
-        $data = Operator::select('operators.*', 'users.*', 'operators.id as id_operator')
-		->leftJoin('users', 'users.id', 'operators.user_id')
-        ->paginate(5);
+        $data = Operator::paginate(5);
         return view('Operator.table', ['data' => $data]);
     }
 
