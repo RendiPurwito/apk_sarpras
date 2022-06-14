@@ -10,6 +10,7 @@
 
     <!-- Favicon -->
     <link href="/assets/img/favicon.ico" rel="icon">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +32,7 @@
     <link href="/assets/css/style.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="">
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
         <div id="spinner"
@@ -62,22 +63,28 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="{{route('home')}}" class="nav-item nav-link active"><i
-                            class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                                class="fa fa-table me-2"></i>Tables</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{route('operator')}}" class="dropdown-item">
-                                <i class="fa fa-table ms-5 me-2"></i>Data Operator</a>
-                            <a href="{{route('barang')}}" class="dropdown-item">
-                                <i class="fa fa-table ms-5 me-2"></i>Data Barang</a>
-                            <a href="{{route('barangmasuk')}}" class="dropdown-item">
-                                <i class="fa fa-table ms-5 me-2"></i>Data Barang Masuk</a>
-                            <a href="{{route('barangkeluar')}}" class="dropdown-item">
-                                <i class="fa fa-table ms-5 me-2"></i>Data Barang Keluar</a>
-                        </div>
-                    </div>
+                    <ul class="nav nav-pills flex-column mb-auto" style="width: 240px;">
+                        <li>
+                            <a href="{{route('home')}}" class="nav-link active"><i
+                                class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                          </li>
+                          <li>
+                            <a href="{{route('operator')}}" class="nav-link">
+                                <img src="https://img.icons8.com/bubbles/50/undefined/user.png" class="me-2" style="width: 40px;"/>Data Operator</a>
+                          </li>
+                          <li>
+                            <a href="{{route('barang')}}" class="nav-link">
+                                <i class="fa fa-table me-2"></i>Data Barang</a>
+                          </li>
+                          <li>
+                            <a href="{{route('barangmasuk')}}" class="nav-link">
+                                <i class="fa fa-table me-2"></i>Data Barang Masuk</a>
+                          </li>
+                          <li>
+                            <a href="{{route('barangkeluar')}}" class=" nav-link">
+                                <i class="fa fa-table me-2"></i>Data Barang Keluar</a>
+                          </li>
+                    </ul>
                 </div>
             </nav>
         </div>
@@ -94,36 +101,11 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control border-0" type="search" placeholder="Search">
-                </form>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
+                        
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Notification</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Profile updated</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">New user added</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Password changed</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all notifications</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            {{auth()->user()->name}}
                             <img class="rounded-circle me-lg-2" src="/assets/img/user.jpg" alt=""
                                 style="width: 40px; height: 40px;">
 

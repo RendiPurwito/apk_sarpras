@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BarangController;
-use App\Http\Controllers\ChangeController;
+// use App\Http\Controllers\ChangeController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\BarangMasukController;
@@ -42,9 +42,9 @@ Route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogi
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // change password
-Route::get('/change', [ChangeController::class, 'change_password'])->name('change');
+// Route::get('/change', [ChangeController::class, 'change_password'])->name('change');
 
-Route::patch('/update', [ChangeController::class, 'update_password'])->name('update_password');
+// Route::patch('/update', [ChangeController::class, 'update_password'])->name('update_password');
 
 // middleware
 Route::group(['middleware' => ['auth']], function () {
