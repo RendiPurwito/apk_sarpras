@@ -26,8 +26,7 @@
                         <td>{{ $row->jenis_barang }}</td>
                         <td>{{ $row->stok_masuk }}</td>
                         <td>
-                            <a href="{{asset('images/'.$row->foto)}}" target="_blank" rel="noopener noreferrer">Lihat
-                                Gambar</a>
+                            <img src="{{asset('images/'.$row->foto)}}" style="height: 10vh">
                         </td>
                         <td>
                             <a href="/editbarangmasuk/{{$row->id_barang}}" class="text-warning">
@@ -38,7 +37,7 @@
                                     <path fill-rule="evenodd"
                                         d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                 </svg>
-                            </a>|
+                            </a>
 
                         
                         </td>

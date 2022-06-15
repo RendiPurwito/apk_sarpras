@@ -28,16 +28,10 @@ class BarangMasukController extends Controller
         $this->validate($request, [
             'barang_id' => 'required',
             'stok_masuk' => 'required',
-            'foto' => 'required|image|mimes:jpg,png,jpeg',
             'tanggal_masuk' => 'required',
         ]);
     
-        $data = BarangMasuk::create($request->all());
-        if ($request->hasFile('foto')) {
-            $request->file('foto')->move('images/', $request->file('foto')->getClientOriginalName());
-            $data->foto = $request->file('foto')->getClientOriginalName();
-            $data->save();
-        }
+        BarangMasuk::create($request->all());
         return redirect()->route('barangmasuk');
     }
 
