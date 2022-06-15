@@ -18,7 +18,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('barang_id');
             $table->integer('stok_masuk');
-            $table->string('foto');
             $table->date('tanggal_masuk');
             $table->timestamps();
         });

@@ -18,7 +18,6 @@ return new class extends Migration
             $table->id();
             $table->string('nama_peminjam');
             $table->foreignId('barang_id');
-            $table->string('foto');
             $table->string('jumlah_barang');
             $table->date('tanggal_keluar');
             $table->foreignId('user_id');
