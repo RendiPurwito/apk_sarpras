@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'Edit Data Barang')
+@section('title', 'Edit Data Barang Keluar')
 
 @section('content')
 <div class="card m-5">
@@ -10,6 +10,17 @@
             <form class="form" action="/updatebarangkeluar/{{ $data->id }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
+
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Tanggal Masuk</label>
+                    <input type="date" class="form-control" name="tanggal_keluar" value="{{ $data->tanggal_keluar }}">
+                    @error('tanggal_keluar')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Nama Peminjam</label>
                     <input type="text" class="form-control" name="nama_peminjam" value="{{ $data->nama_peminjam }}">
@@ -39,17 +50,8 @@
                     @enderror
                 </div>
 
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Tanggal Masuk</label>
-                    <input type="date" class="form-control" name="tanggal_keluar" value="{{ $data->tanggal_keluar }}">
-                    @error('tanggal_keluar')
-                    <div class="text-danger">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
 
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Foto Barang</label>
                     <div class="form-group mb-2">
                         <img src="{{asset('images/'.$data->foto)}}" style="width: 100px">
@@ -60,7 +62,7 @@
                         {{ $message }}
                     </div>
                     @enderror
-                </div>
+                </div> --}}
 
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Operator</label>

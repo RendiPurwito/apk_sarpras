@@ -25,8 +25,7 @@
                         <td>{{ $row->jenis_barang }}</td>
                         <td>{{ $row->stok_barang }}</td>
                         <td>
-                            <a href="{{asset('images/'.$row->foto)}}" target="_blank" rel="noopener noreferrer">Lihat
-                                Gambar</a>
+                            <img src="{{asset('images/'.$row->foto)}}" style="height: 10vh">
                         </td>
                         <td>{{ $row->keterangan }}</td>
                         <td>

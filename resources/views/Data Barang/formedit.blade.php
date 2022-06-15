@@ -1,12 +1,12 @@
 @extends('layout.main')
 
-@section('title', 'Tambah Data Barang')
+@section('title', 'Edit Data Barang')
 
 @section('content')
 <div class="card m-5">
     <div class="col-12">
         <div class="bg-light rounded h-100 p-4">
-            <h6 class="mb-4">Tambah Barang</h6>
+            <h6 class="mb-4">Edit Barang</h6>
             <form class="form" action="/updatebarang/{{ $data->id }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
