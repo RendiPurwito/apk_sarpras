@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', 'Table Data Barang Masuk')
+@section('title', 'Table Data Barang Keluar')
 @section('content')
 <section class="section p-5">
     <a href="/tambahbarangkeluar" type="button" class="btn btn-success mb-3">Tambah +</a>
@@ -8,10 +8,10 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Tanggal</th>
                     <th scope="col">Nama Peminjam</th>
                     <th scope="col">Jumlah Barang</th>
                     <th scope="col">Foto</th>
-                    <th scope="col">Tanggal</th>
                     <th scope="col">Operator</th>
                     <th scope="col">Keterangan</th>
                     <th scope="col">Action</th>
@@ -21,11 +21,11 @@
                 @foreach($data as $index => $row)
                 <tr>
                     <th scope="row">{{ $index + $data->firstItem() }}</th>
+                    <td>{{ $row->tanggal_keluar }}</td>
                     <td>{{ $row->nama_peminjam }}</td>
                     <td>{{ $row->jumlah_barang }}</td>
                     <td><a href="{{asset('images/'.$row->foto)}}" target="_blank" rel="noopener noreferrer">Lihat
                                 Gambar</a></td>
-                    <td>{{ $row->tanggal_keluar }}</td>
                     <td>{{ $row->name }}</td>
                     <td>{{ $row->keterangan}}</td>
                     <td>

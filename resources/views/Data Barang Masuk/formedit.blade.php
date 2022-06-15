@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'Edit Data Barang')
+@section('title', 'Edit Data Barang Masuk')
 
 @section('content')
 <div class="card m-5">
@@ -10,6 +10,17 @@
             <form class="form" action="/updatebarangmasuk/{{ $data->id }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
+
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Tanggal Masuk</label>
+                    <input type="date" class="form-control" name="tanggal_masuk" value="{{$data->tanggal_masuk}}">
+                    @error('tanggal_masuk')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
                     <select class="form-select" name="barang_id">
@@ -34,17 +45,8 @@
                     @enderror
                 </div>
                 
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Tanggal Masuk</label>
-                    <input type="date" class="form-control" name="tanggal_masuk" value="{{$data->tanggal_masuk}}">
-                    @error('tanggal_masuk')
-                    <div class="text-danger">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
 
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Foto Barang</label>
                     <div class="form-group mb-2">
                         <img src="{{asset('images/'.$data->foto)}}" style="width: 100px">
@@ -57,7 +59,7 @@
                         {{ $message }}
                     </div>
                     @enderror
-                </div>
+                </div> --}}
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

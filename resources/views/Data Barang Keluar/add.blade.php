@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'Tambah Data Barang')
+@section('title', 'Tambah Data Barang Keluar')
 
 @section('content')
 <div class="card m-5">
@@ -9,6 +9,17 @@
             <h6 class="mb-4">Tambah Barang Keluar</h6>
             <form class="form" action="{{route ('insertbarangkeluar')}}" method="post" enctype="multipart/form-data">
                 @csrf
+
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Tanggal Masuk</label>
+                    <input type="date" class="form-control" name="tanggal_keluar">
+                    @error('tanggal_keluar')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Nama Peminjam</label>
                     <input type="text" class="form-control" name="nama_peminjam">
@@ -39,17 +50,8 @@
                     @enderror
                 </div>
 
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Tanggal Masuk</label>
-                    <input type="date" class="form-control" name="tanggal_keluar">
-                    @error('tanggal_keluar')
-                    <div class="text-danger">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
 
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Foto Barang</label>
                     <input type="file" class="form-control" name="foto">
                     @error('foto')
@@ -57,7 +59,7 @@
                         {{ $message }}
                     </div>
                     @enderror
-                </div>
+                </div> --}}
 
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Operator</label>

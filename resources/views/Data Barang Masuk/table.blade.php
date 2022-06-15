@@ -9,11 +9,11 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Tanggal Masuk</th>
                         <th scope="col">Nama Barang</th>
                         <th scope="col">Jenis Barang</th>
                         <th scope="col">Stok Masuk</th>
                         <th scope="col">Foto</th>
-                        <th scope="col">Tanggal Masuk</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -21,6 +21,7 @@
                     @foreach($data as $index => $row)
                     <tr>
                         <th scope="row">{{ $index + $data->firstItem() }}</th>
+                        <td>{{ $row->tanggal_masuk}}</td>
                         <td>{{ $row->nama_barang }}</td>
                         <td>{{ $row->jenis_barang }}</td>
                         <td>{{ $row->stok_masuk }}</td>
@@ -28,7 +29,6 @@
                             <a href="{{asset('images/'.$row->foto)}}" target="_blank" rel="noopener noreferrer">Lihat
                                 Gambar</a>
                         </td>
-                        <td>{{ $row->tanggal_masuk}}</td>
                         <td>
                             <a href="/editbarangmasuk/{{$row->id_barang}}" class="text-warning">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"

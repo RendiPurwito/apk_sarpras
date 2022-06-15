@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'Tambah Data Barang')
+@section('title', 'Tambah Data Barang Masuk')
 
 @section('content')
 <div class="card m-5">
@@ -9,6 +9,17 @@
             <h6 class="mb-4">Tambah Barang Masuk</h6>
             <form class="form" action="/insertbarangmasuk" method="post" enctype="multipart/form-data">
                 @csrf
+
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Tanggal Masuk</label>
+                    <input type="date" class="form-control" name="tanggal_masuk">
+                    @error('tanggal_masuk')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
                     <select class="form-select" name="barang_id">
@@ -34,17 +45,8 @@
                     @enderror
                 </div>
                 
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Tanggal Masuk</label>
-                    <input type="date" class="form-control" name="tanggal_masuk">
-                    @error('tanggal_masuk')
-                    <div class="text-danger">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
 
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Foto Barang</label>
                     <input type="file" class="form-control" name="foto">
                     @error('foto')
@@ -52,7 +54,7 @@
                         {{ $message }}
                     </div>
                     @enderror
-                </div>
+                </div> --}}
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
