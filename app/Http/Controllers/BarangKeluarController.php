@@ -43,12 +43,7 @@ class BarangKeluarController extends Controller
         // ]);
 
 
-        $data = BarangKeluar::create($request->all());
-        if ($request->hasFile('foto')) {
-            $request->file('foto')->move('images/', $request->file('foto')->getClientOriginalName());
-            $data->foto = $request->file('foto')->getClientOriginalName();
-            $data->save();
-        }
+        BarangKeluar::create($request->all());
         return redirect()->route('barangkeluar');
     }
 
