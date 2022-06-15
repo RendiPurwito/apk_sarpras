@@ -32,7 +32,12 @@ class BarangMasukController extends Controller
             'tanggal_masuk' => 'required',
         ]);
     
-        BarangMasuk::create($request->all());
+        $data = BarangMasuk::create($request->all());
+        if ($request->hasFile('foto')) {
+            $request->file('foto')->move('images/', $request->file('foto')->getClientOriginalName());
+            $data->foto = $request->file('foto')->getClientOriginalName();
+            $data->save();
+        }
         return redirect()->route('barangmasuk');
     }
 
