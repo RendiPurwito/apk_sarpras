@@ -56,7 +56,8 @@ class BarangKeluarController extends Controller
     {
         $data = BarangKeluar::find($id);
         $databarang = Barang::all();
-        return view('Data Barang Keluar.formedit', compact('data', 'databarang'));
+        $datauser = User::all();
+        return view('Data Barang Keluar.formedit', compact('data', 'databarang', 'datauser'));
     }
 
     public function update(Request $request, $id)

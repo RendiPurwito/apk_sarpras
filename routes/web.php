@@ -1,9 +1,16 @@
 <?php
 
+use App\Models\User;
+// use ChangeController;
+// use ChangeController;
+// use App\Http\Controllers\ChangeController;
+use App\Models\Barang;
+use App\Models\BarangMasuk;
+use App\Models\BarangKeluar;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BarangController;
-// use App\Http\Controllers\ChangeController;
+use PHPUnit\Framework\Constraint\Operator;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\BarangMasukController;
@@ -50,7 +57,11 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::group(['middleware' => ['auth']], function () {
     // Home
     Route::get('/home', function () {
-        return view('dashboard');
+        $datamasuk = BarangMasuk::count();
+        $datakeluar = BarangKeluar::count();
+        $databarang = Barang::count();
+        $datauser = User::count();
+        return view('dashboard', compact('datamasuk', 'datakeluar', 'databarang', 'datauser'));
     })->name('home');
 });
 
