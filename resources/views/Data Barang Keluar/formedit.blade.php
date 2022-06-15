@@ -65,7 +65,6 @@
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Operator</label>
                     <select class="form-select" name="user_id">
-                        <option selected>Select operator</option>
                         @foreach($datauser as $user)
                         <option value="{{$user->id}}">{{$user->name}}</option>
                         @endforeach
