@@ -18,16 +18,6 @@
                     </div>
                     @enderror
                 </div>
-                
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Stok Barang</label>
-                    <input type="number" class="form-control" name="stok_barang">
-                    @error('stok_barang')
-                    <div class="text-danger">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
     
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Jenis Barang</label>

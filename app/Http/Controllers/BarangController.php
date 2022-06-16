@@ -18,14 +18,16 @@ class BarangController extends Controller
     }
 
     public function store(Request $request){
-        $this->validate($request, [
+        $validatedData = $request->validate([
             'nama_barang' => 'required',
-            'stok_barang' => 'required',
+            'keterangan' => 'required',
             'jenis_barang' => 'required',
             'foto' => 'required|image|mimes:jpg,png,jpeg'
         ]);
-    
-        $data = Barang::create($request->all());
+
+        $validatedData['stok_barang'] = 0;
+
+        $data = Barang::create($validatedData);
         if($request->hasFile('foto')){
             $request->file('foto')->move('images/', $request->file('foto')->getClientOriginalName());
             $data->foto = $request->file('foto')->getClientOriginalName();

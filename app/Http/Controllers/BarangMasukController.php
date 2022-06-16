@@ -12,60 +12,92 @@ class BarangMasukController extends Controller
     public function index()
     {
         $data = BarangMasuk::select('barang_masuks.*', 'barangs.*', 'barang_masuks.id as id_barang')
-		->leftJoin('barangs', 'barangs.id', 'barang_masuks.barang_id')
-        ->paginate(5);
+            ->leftJoin('barangs', 'barangs.id', 'barang_masuks.barang_id')
+            ->paginate(5);
         return view('Data Barang Masuk.table', ['data' => $data]);
     }
 
-    public function create(){
+    public function create()
+    {
         $databarang = Barang::all();
-        return view('Data Barang Masuk.add',[
+        return view('Data Barang Masuk.add', [
             'databarang' => $databarang
         ]);
     }
 
-    public function store(Request $request){
-        $this->validate($request, [
-            'barang_id' => 'required',
-            'stok_masuk' => 'required',
-            'foto' => 'required|image|mimes:jpg,png,jpeg',
-            'tanggal_masuk' => 'required',
-        ]);
-    
-        $data = BarangMasuk::create($request->all());
-        if ($request->hasFile('foto')) {
-            $request->file('foto')->move('images/', $request->file('foto')->getClientOriginalName());
-            $data->foto = $request->file('foto')->getClientOriginalName();
-            $data->save();
+    public function store(Request $request)
+    {
+        // $this->validate($request, [
+        //     'barang_id' => 'required',
+        //     'stok_masuk' => 'required',
+        //     'foto' => 'required|image|mimes:jpg,png,jpeg',
+        //     'tanggal_masuk' => 'required',
+        // ]);
+        BarangMasuk::create($request->all());
+
+        $barangs = BarangMasuk::where('barang_id', $request->barang_id)->get();
+        $total = 0;
+        foreach ($barangs as $key => $barang) {
+            $total += $barang->stok_masuk;
         }
+
+        Barang::find($request->barang_id)->update([
+            'stok_barang' => $total
+        ]);
+        
+
+        // if ($request->hasFile('foto')) {
+        //     $request->file('foto')->move('images/', $request->file('foto')->getClientOriginalName());
+        //     $data->foto = $request->file('foto')->getClientOriginalName();
+        //     $data->save();
+        // }
         return redirect()->route('barangmasuk');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $data = BarangMasuk::find($id);
         $databarang = Barang::all();
         return view('Data Barang Masuk.formedit', compact('data', 'databarang'));
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
+        $validateData = $request->validate([
+            'tanggal_masuk' => 'required',
+            'barang_id' => 'required',
+            'stok_masuk' => 'required'
+        ]);
+
         $data = BarangMasuk::find($id);
-        $data->update($request->all());
-        if ($request->hasFile('foto')) {
-            $destination = 'images/'.$data->foto;
-            if(File::exists($destination)){
-                File::delete($destination);
-            }
-            $file = $request->file('foto');
-            $extension = $file->getClientOriginalName();
-            $filename = time().'.'.$extension;
-            $file->move('images/', $filename);
-            $data->foto = $filename;
+
+        if($data->barang_id != $request->barang_id){
+            $barang = Barang::where('id', $data->barang_id)->get()->first();
+            $stok_barang = $barang->stock_masuk - $data->stock_masuk; 
+
+            $barang->update([
+                'stok_barang' => $stok_barang
+            ]);
+        };
+
+        $data->update($validateData);
+
+        $allBarangMasuk = BarangMasuk::where('barang_id', $data->barang_id)->get();
+
+        $total = 0;
+        foreach ($allBarangMasuk as $key => $barang) {
+            $total += $barang->stok_masuk;
         }
-        $data->update();
+
+        Barang::find($request->barang_id)->update([
+            'stok_barang' => $total
+        ]);
+
         return redirect()->route('barangmasuk');
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $data = BarangMasuk::find($id);
         $data->delete();
         return redirect()->route('barangmasuk');

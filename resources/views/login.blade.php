@@ -24,9 +24,9 @@
                         <a href="" class="text-dark">
                         </a>
                     </div>
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <span><u><a href="  " class="text-dark">Forgot Password?</a></u></span>
-                    </div>
+                    </div> --}}
                     <div class="text-center">
                         <button type="submit" class="btn btn-color px-5 mb-5 w-100 ">Login</button>
                     </div>

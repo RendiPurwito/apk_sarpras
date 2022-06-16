@@ -27,9 +27,9 @@ use App\Http\Controllers\BarangKeluarController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // register
 Route::get('/register', function () {
@@ -40,7 +40,7 @@ Route::post('/postregister', [RegisterController::class, 'postregister'])->name(
 
 
 // Login
-Route::get('/login', function () {
+Route::get('/', function () {
     return view('login');
 })->name('login');
 

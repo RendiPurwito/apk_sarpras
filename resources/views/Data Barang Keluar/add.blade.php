@@ -60,7 +60,7 @@
                     </div>
                     @enderror
                 </div> --}}
-
+{{-- 
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Operator</label>
                     <select class="form-select" name="user_id">
@@ -74,7 +74,7 @@
                         {{ $message }}
                     </div>
                     @enderror
-                </div>
+                </div> --}}
 
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Keterangan</label>

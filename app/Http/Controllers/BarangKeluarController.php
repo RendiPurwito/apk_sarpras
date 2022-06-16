@@ -6,7 +6,9 @@ use App\Models\User;
 use App\Models\Barang;
 use App\Models\Operator;
 use App\Models\BarangKeluar;
+use App\Models\BarangMasuk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class BarangKeluarController extends Controller
@@ -34,21 +36,42 @@ class BarangKeluarController extends Controller
     {
         // dd($request->all());
         // $this->validate($request, [
-        //     'nama_peminjam' => 'required',
-        //     'barang_id' => 'required',
-        //     'jumlah_barang' => 'required',
-        //     'foto' => 'required|image|mimes:jpg,png,jpeg',
-        //     'tanggal_keluar' => 'required',
-        //     'operator_id' => 'required',
+        //     
         // ]);
+        $validatedData = $request->validate([
+            'nama_peminjam' => 'required',
+            'barang_id' => 'required',
+            'tanggal_keluar' => 'required',
+            'jumlah_barang' => 'required',
+            'keterangan' => 'required'
+        ]);
 
+        $validatedData['user_id'] = Auth::user()->id;
 
-        $data = BarangKeluar::create($request->all());
-        if ($request->hasFile('foto')) {
-            $request->file('foto')->move('images/', $request->file('foto')->getClientOriginalName());
-            $data->foto = $request->file('foto')->getClientOriginalName();
-            $data->save();
+        $barangmasuk = Barangmasuk::where('barang_id', $request->barang_id)->get();
+        $barangMasukJml = 0;
+        foreach ($barangmasuk as $key => $barang) {
+            $barangMasukJml += $barang->stok_masuk;
         }
+
+        $barangKeluar = BarangKeluar::where('barang_id', $request->barang_id)->get();
+        $barangKeluarJml = 0;
+        foreach ($barangKeluar as $key => $barang) {
+            $barangKeluarJml += $barang->jumlah_barang;
+        }
+
+        $hasil = $barangMasukJml - ($barangKeluarJml + $request->jumlah_barang);
+
+        if ($hasil < 0) {
+            return redirect()->route('barangkeluar')->with('status', 'Stok Barang Tidak Mencukupi');
+        }
+
+        Barang::find($request->barang_id)->update([
+            'stok_barang' => $hasil
+        ]);
+
+        $data = BarangKeluar::create($validatedData);
+
         return redirect()->route('barangkeluar');
     }
 
@@ -63,19 +86,39 @@ class BarangKeluarController extends Controller
     public function update(Request $request, $id)
     {
         $data = BarangKeluar::find($id);
-        $data->update($request->all());
-        if ($request->hasFile('foto')) {
-            $destination = 'images/' . $data->foto;
-            if (File::exists($destination)) {
-                File::delete($destination);
-            }
-            $file = $request->file('foto');
-            $extension = $file->getClientOriginalName();
-            $filename = time() . '.' . $extension;
-            $file->move('images/', $filename);
-            $data->foto = $filename;
+        // dd($data);
+
+        $barangmasuk = Barangmasuk::where('barang_id', $request->barang_id)->get();
+        $barangMasukJml = 0;
+        foreach ($barangmasuk as $key => $barang) {
+            $barangMasukJml += $barang->stok_masuk;
         }
-        $data->update();
+
+        if ($data->barang_id != $request->barang_id) {
+
+            $barang = Barang::find($data->barang_id);
+
+            $hasil = $barangMasukJml + $data->jumlah_barang;
+
+            $barang->update([
+                'stok_barang' => $hasil
+            ]);
+        };
+
+        $barangKeluar = BarangKeluar::where('barang_id', $request->barang_id)->get();
+        $barangKeluarJml = 0;
+        foreach ($barangKeluar as $key => $barang) {
+            $barangKeluarJml += $barang->jumlah_barang;
+        }
+
+        $hasil2 = $barangMasukJml - ($barangKeluarJml + $request->jumlah_barang);
+
+        if ($hasil2 < 0) {
+            return redirect()->route('barangkeluar')->with('status', 'Stok Barang Tidak Mencukupi');
+        }
+
+        $data->update($request->all());
+
         return redirect()->route('barangkeluar');
     }
 
