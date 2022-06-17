@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 
 class BarangMasukController extends Controller
 {
+    // ? tampilan data
     public function index()
     {
         $data = BarangMasuk::select('barang_masuks.*', 'barangs.*', 'barang_masuks.id as id_barang')
@@ -17,6 +18,7 @@ class BarangMasukController extends Controller
         return view('Data Barang Masuk.table', ['data' => $data]);
     }
 
+    // ?input data masuk
     public function create()
     {
         $databarang = Barang::all();
@@ -25,6 +27,7 @@ class BarangMasukController extends Controller
         ]);
     }
 
+    // ? submit data masuk
     public function store(Request $request)
     {
         // $this->validate($request, [
@@ -33,18 +36,19 @@ class BarangMasukController extends Controller
         //     'foto' => 'required|image|mimes:jpg,png,jpeg',
         //     'tanggal_masuk' => 'required',
         // ]);
-        BarangMasuk::create($request->all());
+        $barangMasuk = BarangMasuk::create($request->all());
+        $barang = Barang::find($request->barang_id);
 
-        $barangs = BarangMasuk::where('barang_id', $request->barang_id)->get();
+        // $barangs = BarangMasuk::where('barang_id', $request->barang_id)->get();
         $total = 0;
-        foreach ($barangs as $key => $barang) {
-            $total += $barang->stok_masuk;
-        }
+        // foreach ($barangs as $key => $barang) {
+        $total += $barangMasuk->stok_masuk;
+        // }
 
-        Barang::find($request->barang_id)->update([
-            'stok_barang' => $total
+        $barang->update([
+            'stok_barang' => $total + $barang->stok_barang,
         ]);
-        
+
 
         // if ($request->hasFile('foto')) {
         //     $request->file('foto')->move('images/', $request->file('foto')->getClientOriginalName());
@@ -54,6 +58,7 @@ class BarangMasukController extends Controller
         return redirect()->route('barangmasuk');
     }
 
+    // ? tampilan edit masuk
     public function edit($id)
     {
         $data = BarangMasuk::find($id);
@@ -61,6 +66,7 @@ class BarangMasukController extends Controller
         return view('Data Barang Masuk.formedit', compact('data', 'databarang'));
     }
 
+    // ? submit edit masuk
     public function update(Request $request, $id)
     {
         $validateData = $request->validate([
@@ -71,9 +77,9 @@ class BarangMasukController extends Controller
 
         $data = BarangMasuk::find($id);
 
-        if($data->barang_id != $request->barang_id){
-            $barang = Barang::where('id', $data->barang_id)->get()->first();
-            $stok_barang = $barang->stock_masuk - $data->stock_masuk; 
+        if ($data->barang_id != $request->barang_id) {
+            $barang = Barang::where('id', $data->barang_id)->first();
+            $stok_barang = $barang->stock_barang - $data->stock_masuk;
 
             $barang->update([
                 'stok_barang' => $stok_barang
@@ -96,6 +102,7 @@ class BarangMasukController extends Controller
         return redirect()->route('barangmasuk');
     }
 
+    // ? hapus data
     public function destroy($id)
     {
         $data = BarangMasuk::find($id);

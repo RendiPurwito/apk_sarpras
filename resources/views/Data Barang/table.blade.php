@@ -1,5 +1,6 @@
 @extends('layout.main')
 @section('title', 'Table Data Barang')
+@section('nav', 'Table Data Barang')
 @section('content')
 <div class="container p-5">
     <a href="/tambahbarang" type="button" class="btn btn-success mb-3">Tambah +</a>

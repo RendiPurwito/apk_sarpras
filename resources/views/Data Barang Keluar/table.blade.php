@@ -1,5 +1,6 @@
 @extends('layout.main')
 @section('title', 'Table Data Barang Keluar')
+@section('nav', 'Table Data Barang Keluar')
 @section('content')
 
 @if (session('status'))
