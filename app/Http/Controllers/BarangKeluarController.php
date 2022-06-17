@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\File;
 
 class BarangKeluarController extends Controller
 {
+    //? tampil data keluar
     public function keluar()
     {
         $data = BarangKeluar::select('barang_keluars.*', 'barangs.*', 'users.*', 'barang_keluars.id as id_barang')
@@ -22,6 +23,7 @@ class BarangKeluarController extends Controller
         return view('Data Barang Keluar.table', ['data' => $data]);
     }
 
+    //? tampilan input barang keluar
     public function create()
     {
         $databarang = Barang::all();
@@ -32,6 +34,7 @@ class BarangKeluarController extends Controller
         ]);
     }
 
+    //? simpan input barang keluar
     public function store(Request $request)
     {
         // dd($request->all());
@@ -75,6 +78,7 @@ class BarangKeluarController extends Controller
         return redirect()->route('barangkeluar');
     }
 
+    //? tampilan edit data keluar
     public function edit($id)
     {
         $data = BarangKeluar::find($id);
@@ -83,6 +87,7 @@ class BarangKeluarController extends Controller
         return view('Data Barang Keluar.formedit', compact('data', 'databarang', 'datauser'));
     }
 
+    //? simpan data edit keluar
     public function update(Request $request, $id)
     {
         $data = BarangKeluar::find($id);
