@@ -23,7 +23,11 @@
                         <th scope="row">{{ $index + $data->firstItem() }}</th>
                         <td>{{ $row->nama_barang }}</td>
                         <td>{{ $row->jenis_barang }}</td>
-                        <td>{{ $row->stok_barang }}</td>
+                        @if ($row->stok_barang <= 40)
+                            <td class="table-danger">{{ $row->stok_barang }}</td>
+                        @else
+                            <td>{{ $row->stok_barang }}</td>
+                        @endif
                         <td>
                             <img src="{{asset('images/'.$row->foto)}}" style="height: 10vh">
                         </td>

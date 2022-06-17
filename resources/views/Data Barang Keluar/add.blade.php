@@ -30,7 +30,7 @@
                     <select class="form-select" name="barang_id">
                     <option selected>Select Barang</option>
                         @foreach($databarang as $data2)
-                        <option value="{{$data2->id}}">{{$data2->nama_barang}}</option>
+                        <option value="{{$data2->id}}">{{$data2->nama_barang}} (Tersedia {{ $data2->stok_barang }})</option>
                         @endforeach
                     </select>
                     @error('barang_id')
@@ -49,6 +49,8 @@
                     </div>
                     @enderror
                 </div>
+
+                
 
 
                 {{-- <div class="mb-3">
