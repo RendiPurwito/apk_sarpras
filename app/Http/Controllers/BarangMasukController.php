@@ -68,7 +68,7 @@ class BarangMasukController extends Controller
 
     // ? submit edit masuk
     public function update(Request $request, $id)
-    {
+    {  
         $validateData = $request->validate([
             'tanggal_masuk' => 'required',
             'barang_id' => 'required',
