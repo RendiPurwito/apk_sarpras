@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\File;
 
 class BarangKeluarController extends Controller
 {
+    //? tampil data keluar
     public function keluar()
     {
         $data = BarangKeluar::select('barang_keluars.*', 'barangs.*', 'users.*', 'barang_keluars.id as id_barang')
@@ -22,6 +23,7 @@ class BarangKeluarController extends Controller
         return view('Data Barang Keluar.table', ['data' => $data]);
     }
 
+    //? tampilan input barang keluar
     public function create()
     {
         $databarang = Barang::all();
@@ -32,6 +34,7 @@ class BarangKeluarController extends Controller
         ]);
     }
 
+    //? simpan input barang keluar
     public function store(Request $request)
     {
         // dd($request->all());
@@ -75,6 +78,7 @@ class BarangKeluarController extends Controller
         return redirect()->route('barangkeluar');
     }
 
+    //? tampilan edit data keluar
     public function edit($id)
     {
         $data = BarangKeluar::find($id);
@@ -83,45 +87,57 @@ class BarangKeluarController extends Controller
         return view('Data Barang Keluar.formedit', compact('data', 'databarang', 'datauser'));
     }
 
+    //? simpan data edit keluar
     public function update(Request $request, $id)
     {
+        $validateData = $request->validate([
+            'tanggal_keluar' => 'required',
+            'barang_id' => 'required',
+            'jumlah_barang' => 'required'
+        ]);
+
         $data = BarangKeluar::find($id);
-        // dd($data);
 
-        $barangmasuk = Barangmasuk::where('barang_id', $request->barang_id)->get();
-        $barangMasukJml = 0;
-        foreach ($barangmasuk as $key => $barang) {
-            $barangMasukJml += $barang->stok_masuk;
-        }
 
-        if ($data->barang_id != $request->barang_id) {
-
-            $barang = Barang::find($data->barang_id);
-
-            $hasil = $barangMasukJml + $data->jumlah_barang;
+        $barang = Barang::where('id', $data->barang_id)->first();
+        if ($data->barang_id != $id) {
+            $stok_barang = $barang->stock_barang - $data->jumlah_barang;
 
             $barang->update([
-                'stok_barang' => $hasil
+                'stok_barang' => $stok_barang
             ]);
         };
 
-        $barangKeluar = BarangKeluar::where('barang_id', $request->barang_id)->get();
-        $barangKeluarJml = 0;
-        foreach ($barangKeluar as $key => $barang) {
-            $barangKeluarJml += $barang->jumlah_barang;
+        $data->update($validateData);
+
+        $allBarangKeluar = BarangKeluar::where('barang_id', $data->barang_id)->get();
+
+        $total = 0;
+        foreach ($allBarangKeluar as $key => $barangKeluar) {
+            $total += $barangKeluar->jumlah_barang;
         }
 
-        $hasil2 = $barangMasukJml - ($barangKeluarJml + $request->jumlah_barang);
-
-        if ($hasil2 < 0) {
-            return redirect()->route('barangkeluar')->with('status', 'Stok Barang Tidak Mencukupi');
-        }
-
-        $data->update($request->all());
+        Barang::find($id)->update([
+            'stok_barang' => $total + $barang->stok_barang,
+        ]);
 
         return redirect()->route('barangkeluar');
+        $barangKeluar = BarangKeluar::find($id);
+        $barang = Barang::find($barangKeluar->barang_id);
+
+        // $kalkulasi = $request->jumlah_barang + $barang->stok_barang;
+
+        // // if ($hasil2 < 0) {
+        // //     return redirect()->route('barangkeluar')->with('status', 'Stok Barang Tidak Mencukupi');
+        // // }
+        // $barang->update(['stok_barang' => $kalkulasi]);
+
+        // $barangKeluar->update($request->all());
+
+        // return redirect()->route('barangkeluar');
     }
 
+    // ? hapus data keluar
     public function destroy($id)
     {
         $data = BarangKeluar::find($id);
