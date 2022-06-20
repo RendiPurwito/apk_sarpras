@@ -3,8 +3,11 @@
 @section('nav', 'Table Data Barang Masuk')
 @section('content')
 <div class="container p-5">
-    <a href="/tambahbarangmasuk" type="button" class="btn btn-success mb-3">Tambah +</a>
-    <section class="section">
+    <div class="button d-flex">
+        <a href="/tambahbarangmasuk" type="button" class="btn btn-success mb-3 me-3">Tambah +</a>
+        <section class="section">
+        <a href="/excelbarangmasuk" type="button" class="btn btn-success mb-3">Excel</a>
+    </div>
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>

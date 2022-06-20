@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Barang;
 use App\Models\Operator;
-use App\Models\BarangKeluar;
 use App\Models\BarangMasuk;
+use App\Models\BarangKeluar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class BarangKeluarController extends Controller
 {
@@ -143,5 +144,12 @@ class BarangKeluarController extends Controller
         $data = BarangKeluar::find($id);
         $data->delete();
         return redirect()->route('barangkeluar');
+    }
+
+    public static function excel(){
+        return (new FastExcel(BarangKeluar::select('users.name as operator','barangs.nama_barang', 'barangs.jenis_barang', 'barangs.foto', 'barang_keluars.tanggal_keluar', 'barang_keluars.jumlah_barang', 'barang_keluars.keterangan') 
+        ->leftJoin('barangs', 'barangs.id', 'barang_keluars.barang_id') 
+        ->leftJoin('users', 'users.id', 'barang_keluars.user_id') 
+        ->get()))->download('databarangkeluar.xlsx');
     }
 }

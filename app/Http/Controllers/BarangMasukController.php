@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Models\BarangMasuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class BarangMasukController extends Controller
 {
@@ -109,4 +110,12 @@ class BarangMasukController extends Controller
         $data->delete();
         return redirect()->route('barangmasuk');
     }
+    
+    public static function excel(){
+        return (new FastExcel(BarangMasuk::select('barang_masuks.stok_masuk', 'barang_masuks.tanggal_masuk', 'barangs.nama_barang', 'barangs.jenis_barang', 'barangs.foto') 
+        ->leftJoin('barangs', 'barangs.id', 'barang_masuks.barang_id') 
+        ->get()))->download('databarangmasuk.xlsx');
+    }
+
+
 }
