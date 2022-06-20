@@ -90,6 +90,7 @@ Route::post('/insertbarangmasuk', [BarangMasukController::class, 'store'])->name
 Route::get('/editbarangmasuk/{id}', [BarangMasukController::class, 'edit'])->name('editbarangmasuk');
 Route::put('/updatebarangmasuk/{id}', [BarangMasukController::class, 'update'])->name('updatebarangmasuk');
 Route::get('/deletebarangmasuk/{id}', [BarangMasukController::class, 'destroy'])->name('deletebarangmasuk');
+Route::get('/excelbarangmasuk', [BarangMasukController::class, 'excel'])->name('excelbarangmasuk');
 
 // Barang Keluar
 Route::get('/barangkeluar', [BarangKeluarController::class, 'keluar'])->name('barangkeluar');
@@ -98,3 +99,5 @@ Route::post('/insertbarangkeluar', [BarangKeluarController::class, 'store'])->na
 Route::get('/editbarangkeluar/{id}', [BarangKeluarController::class, 'edit'])->name('editbarangkeluar');
 Route::put('/updatebarangkeluar/{id}', [BarangKeluarController::class, 'update'])->name('updatebarangkeluar');
 Route::get('/deletebarangkeluar/{id}', [BarangKeluarController::class, 'destroy'])->name('deletebarangkeluar');
+Route::get('/excelbarangkeluar', [BarangKeluarController::class, 'excel'])->name('excelbarangkeluar');
+

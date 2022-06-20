@@ -12,7 +12,10 @@
 @endif
 
 <section class="section p-5">
-    <a href="/tambahbarangkeluar" type="button" class="btn btn-success mb-3">Tambah +</a>
+    <div class="button d-flex">
+        <a href="/tambahbarangkeluar" type="button" class="btn btn-success mb-3 me-3">Tambah +</a>
+        <a href="/excelbarangkeluar" type="button" class="btn btn-success mb-3">Excel</a>
+    </div>
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
